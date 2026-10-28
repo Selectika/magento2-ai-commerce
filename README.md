@@ -1,6 +1,6 @@
 # Selectika AI Commerce for Magento
 
-Composer module `selectika/module-ai-commerce`, Magento module `Selectika_AiCommerce`, version 0.1.0.
+Composer module `selectika/module-ai-commerce`, Magento module `Selectika_AiCommerce`, version 0.1.1.
 The module supplies a protected catalog snapshot and the existing Selectika storefront loader,
 with an optional native commerce event bridge. All features are disabled on installation.
 Account linking is manual in this version. This source package is not a Marketplace listing.
@@ -40,12 +40,12 @@ Use the merchant's deployment process and installed locales. Check published ver
 [Packagist](https://packagist.org/packages/selectika/module-ai-commerce) and the
 [public release repository](https://github.com/Selectika/magento2-ai-commerce).
 
-For local development before publication, copy this module inside the Magento project at
+For local development, copy this module inside the Magento project at
 `packages/selectika/module-ai-commerce` and use a path repository:
 
 ```sh
-composer config repositories.selectika-ai-commerce '{"type":"path","url":"packages/selectika/module-ai-commerce","options":{"versions":{"selectika/module-ai-commerce":"0.1.0"},"symlink":false}}'
-composer require selectika/module-ai-commerce:0.1.0
+composer config repositories.selectika-ai-commerce '{"type":"path","url":"packages/selectika/module-ai-commerce","options":{"versions":{"selectika/module-ai-commerce":"0.1.1"},"symlink":false}}'
+composer require selectika/module-ai-commerce:0.1.1
 ```
 
 Then run the same module-enable, setup, compilation and cache commands above. This version
@@ -58,25 +58,146 @@ Use separate store-view settings where publishers/catalog language differ.
 
 ## Native description integration, with or without the module
 
-In **System → Extensions → Integrations**, manually add an integration named
-`Selectika descriptions` (or a merchant-approved distinct name). Leave callback and identity URLs
-empty for this manual setup. Supply the merchant's real contact email if required by that version.
-Select **Catalog → Inventory → Products**, resource `Magento_Catalog::products`, and authorize it.
-This native resource permits product operations; Magento does not provide a description-only
-field ACL. Selectika's adapter restricts its payload to the chosen description attribute.
-The module does not auto-create, overwrite or activate an existing integration.
+Use **Descriptions only — Magento REST API** (`direct`) when the merchant wants AI description
+updates without waiting for a Magento code release. This path needs no module, Composer command,
+PHP change or webhook receiver. It does not add a catalog feed or storefront tracking. Use
+**Full Selectika Magento extension** (`extension`) when the separately installed module's catalog
+and storefront features are also required. Both modes use the same native description writer;
+selecting extension mode does not install the module.
 
-Save consumer key, consumer secret, access token and access-token secret through Selectika's
-Magento connection editor in the retailer's existing Server settings. Choose the explicit store
-code, description attribute (`description` or `short_description`), SKU source and active mode.
-For the example feed below choose `sourceObj.parent_sku`; a numeric entity ID is not a SKU.
-These OAuth secrets live in Selectika's private credential storage, separately from the feed token.
-Do not enable Magento's legacy standalone OAuth bearer option to avoid request signing.
+This guide covers Magento 2 Open Source and Adobe Commerce on-premises/PaaS native REST, not
+Magento 1 or Adobe Commerce as a Cloud Service (SaaS). See Adobe's
+[authentication overview](https://developer.adobe.com/commerce/webapi/get-started/authentication/).
+Validate the merchant's actual version and customizations; this is not an all-version compatibility
+claim. Selectika staff must first confirm deployment of the connection editor, API and publishing
+worker, and access to private credential storage. This guide and the module's package release
+alone do not establish that backend readiness or activate any merchant.
 
-Enable the existing description publication policy only after testing an approved product in the
-correct store view. Pending approval remains local; publishing performs native REST read/write/
-readback. No webhook receiver, administrator password or Magento PHP deployment is required for
-the `direct` option. Magento native OAuth resources do not grant access to this module's feed.
+### 1. Prepare the target
+
+Agree on the canonical public HTTPS Magento installation URL, an explicit store-view **Code**
+(**Stores → All Stores → the intended Store View**), one product's exact SKU, and either
+`description` or `short_description`. The URL must exclude `/rest`, product paths, credentials,
+query parameters and fragments; retain an installation subdirectory if applicable. Use the final
+host without redirects. Private/localhost destinations are rejected.
+
+Do not assume the code is `default`; `all` and `admin` are rejected. Confirm attribute scope and
+store-view inheritance with the merchant, especially for customized global attributes. A numeric
+product entity ID is not automatically a SKU. Deliberately choose the parent or variant product
+whose description should change, and keep its original text for the pilot.
+
+### 2. Create and authorize the Magento integration
+
+The merchant's Magento administrator performs these steps:
+
+1. Open **System → Extensions → Integrations → Add New Integration**, name it
+   `Selectika descriptions`, and provide a real contact email if required.
+2. Leave **Callback URL** and **Identity Link URL** empty for this manually activated integration.
+   If asked for **Your Password**, enter it only in Magento. Adobe documents this manual flow in
+   its [integration setup instructions](https://developer.adobe.com/commerce/extensibility/starter-kit/integration/create-integration);
+   installing that starter kit is not required here.
+3. Under **API → Resource Access → Custom**, select **Catalog → Inventory → Products**,
+   resource `Magento_Catalog::products`. Do not grant `All`.
+4. Save, select **Activate**, review the permissions and select **Allow**. Securely retain the
+   **Consumer Key**, **Consumer Secret**, **Access Token** and **Access Token Secret** from
+   **Integration Tokens for Extensions**, then select **Done**. See Adobe's
+   [activation instructions](https://experienceleague.adobe.com/en/docs/commerce-admin/systems/integrations).
+
+The native product resource also authorizes other product operations; Magento has no
+description-only field ACL for this endpoint. Selectika restricts its own update payload to the
+selected description attribute. A hard field-level authorization boundary would require a
+separate Magento customization. See the native
+[ACL](https://github.com/magento/magento2/blob/2.4-develop/app/code/Magento/Catalog/etc/acl.xml) and
+[product API resources](https://github.com/magento/magento2/blob/2.4-develop/app/code/Magento/Catalog/etc/webapi.xml).
+The merchant owns the integration and can revoke it. Do not share the administrator password,
+paste OAuth values into tickets, or reuse the separate module feed token.
+
+### 3. Save the connection in Selectika
+
+Selectika staff with Admin access opens the retailer's **Settings → Server → Platform connections
+→ Magento**. These controls are currently staff-only. In **Magento connection**:
+
+| Control                                                             | Value                                                                |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Enable Magento connection                                           | Enable the connection; publishing is configured separately           |
+| Integration                                                         | Descriptions only — Magento REST API                                 |
+| Store URL                                                           | The canonical public HTTPS installation URL                          |
+| Store view code                                                     | The explicit storefront code agreed above                            |
+| Product SKU source                                                  | Selectika item ID (mapped product SKU), Feed parent_sku, or Feed sku |
+| Description field                                                   | Description or Short description                                     |
+| Consumer key / Consumer secret / Access token / Access token secret | All four values from the same active integration                     |
+
+The SKU choices read `mId`, `sourceObj.parent_sku`, or `sourceObj.sku`, respectively. Compare the
+actual feed value with Magento before selecting one. The module feed example below uses
+`sourceObj.parent_sku` for parent descriptions; other feeds may differ.
+
+Select **Save connection**, then **Test saved connection**. The test uses persisted settings and
+performs an authenticated catalog read. It does not write a product or verify write access. A
+configuration marked ready means settings and credentials exist, not that a live publish passed.
+If saving reports a failed runtime refresh, staff must reload the retailer before publishing.
+
+OAuth values are write-only in the UI and stored in Google Secret Manager. Retailer configuration
+holds a backend-managed version reference; settings responses expose neither that reference nor
+the secrets. Leave **all four fields empty** to retain saved credentials. To replace them, submit
+all four values together. Empty fields do not delete credentials.
+
+### 4. Use the existing approval and publication flow
+
+Connection setup does not enable AI generation or publishing. Staff configures the existing
+description settings at `server.productsApiControl.createDescription.writeback`: `enabled: true`,
+`platform: "magento"` (lowercase) and, for the pilot, `publishMode: "pending_approval"`. Preserve
+the retailer's other settings. `immediate` remains available when the merchant explicitly chooses
+the existing automatic publication policy.
+
+In the existing AI Description workflow (`/actions/ai-description`), review one approved test
+product in the agreed store view. With pending approval, the draft stays in Selectika until
+publication is approved. Approval while writeback is disabled can mark content reviewed locally;
+it is not proof that Magento changed.
+
+On publication, Selectika reads the exact SKU, writes only the selected custom attribute if the
+content differs, and reads the same product again to compare the saved text. All three requests
+use `/rest/{storeViewCode}/V1/products/{URL-encoded-SKU}`. A successful PUT alone is not acceptance;
+a readback mismatch is a failure. Verify delivery status, the Magento value and the storefront in
+the intended language. Check other attributes/store views against the agreed scope. Product-save
+extensions and storefront caches remain part of merchant-specific validation. Expand beyond the
+pilot only after acceptance; retain the old text for a deliberate restore if required.
+
+Selectika signs each request using OAuth 1.0a **HMAC-SHA256**, a fresh nonce and UTC timestamp,
+with all four credentials. It sends `Authorization: OAuth …`, not a static Bearer token. See
+[Adobe OAuth authentication](https://developer.adobe.com/commerce/webapi/get-started/authentication/gs-authentication-oauth).
+Do not enable **Allow OAuth Access Tokens to be used as standalone Bearer tokens** as a workaround;
+Adobe describes that legacy option as disabled by default in its
+[token authentication documentation](https://developer.adobe.com/commerce/webapi/get-started/authentication/gs-authentication-token).
+
+### Rotation and troubleshooting
+
+Coordinate Magento **Reauthorize** with Selectika, then replace all four current values in the
+editor, save and retest. Reauthorization issues a new access token and token secret. Credential
+replacement creates a new private secret version; older versions are not automatically disabled
+by this implementation and require the infrastructure team's retention process. Disabling the
+Selectika connection or publishing does not revoke the Magento integration or delete secrets.
+
+| Symptom                            | Check                                                                                                             |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Selectika 403 / missing editor     | Staff Admin role and deployed Dashboard/API version                                                               |
+| Save fails                         | Complete four-field replacement, valid settings and Secret Manager permissions                                    |
+| Save conflict (409)                | Select Reload, review the latest connection, then reapply the intended change                                     |
+| Magento 401                        | Active integration, matching credentials, reauthorization, synchronized clocks and preserved Authorization header |
+| Magento 403                        | Products resource, authorization after permission changes, and WAF rules for PUT as well as GET                   |
+| Magento 404 / missing product      | Installation URL, REST route, store code, exact parent/variant SKU and product assignment                         |
+| Redirect, login page or HTML       | Final canonical URL, staging access gate, CDN challenge or WAF; redirects are not followed                        |
+| TLS / DNS / timeout                | Valid certificate chain, public DNS and server-to-server connectivity                                             |
+| Magento 400                        | Attribute availability, content constraints and custom product-save validation                                    |
+| Read succeeds but no publish       | Existing writeback policy, lowercase platform value and pending approval                                          |
+| PUT succeeds but readback differs  | HTML transformations, concurrent edits, scope/inheritance or API caching                                          |
+| API changed but storefront did not | Store view, rendered attribute and storefront/CDN caches                                                          |
+
+Allow the required signed GET/PUT REST traffic with narrowly scoped security rules; do not disable
+site-wide WAF protection. Share timestamps, SKU, store code and sanitized errors for diagnosis,
+never credentials or Authorization headers. Adobe's
+[OAuth error reference](https://developer.adobe.com/commerce/webapi/get-started/authentication/oauth-errors)
+can help identify signature failures. No merchant is considered connected until deployment,
+credential storage, authenticated read, approved write/readback and storefront checks are verified.
 
 ## Catalog export and Selectika feed configuration
 

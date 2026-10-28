@@ -6,7 +6,7 @@ namespace Selectika\AiCommerce\Console;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\State;
 use Magento\Store\Model\StoreManagerInterface;
-use Selectika\AiCommerce\Model\ExportCatalog;
+use Selectika\AiCommerce\Model\ExportCatalogFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,7 +15,7 @@ use Throwable;
 
 class ExportCommand extends Command
 {
-    public function __construct(private ExportCatalog $exporter, private StoreManagerInterface $stores, private State $state)
+    public function __construct(private ExportCatalogFactory $exporterFactory, private StoreManagerInterface $stores, private State $state)
     {
         parent::__construct();
     }
@@ -36,7 +36,9 @@ class ExportCommand extends Command
         }
         try {
             $manifest = $this->state->emulateAreaCode(Area::AREA_CRONTAB, function () use ($code): array {
-                return $this->exporter->export((int) $this->stores->getStore($code)->getId());
+                // CLI commands are registered before setup has created the default website.
+                // Defer the catalog dependency graph until this command actually runs.
+                return $this->exporterFactory->create()->export((int) $this->stores->getStore($code)->getId());
             });
             $output->writeln(sprintf('Published snapshot %s: %d rows in %d pages.', $manifest['snapshot_id'], $manifest['total_rows'], count($manifest['pages'])));
             return 0;

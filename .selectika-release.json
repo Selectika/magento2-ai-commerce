@@ -3,9 +3,9 @@
   "distribution": "Selectika/magento2-ai-commerce",
   "package": "selectika/module-ai-commerce",
   "sourcePath": "plugins/magento",
-  "sourceSha": "77264da3c03660aa23a17d2e2b79a7afeb813663",
-  "version": "0.1.0",
-  "contentSha256": "18e724cf38f245f3065de50d38a81f324beda20c80cf488df49a5af1adb03c09",
+  "sourceSha": "3f648911932ce5c3021700b27ce22caf116844b9",
+  "version": "0.1.1",
+  "contentSha256": "dfa99c3ede96be38a76886da197b809ee55d91ab1c572300479bb8c0700bfdf7",
   "files": [
     {
       "path": ".gitattributes",
@@ -20,7 +20,7 @@
     {
       "path": "Console/ExportCommand.php",
       "mode": "100644",
-      "sha256": "beb2f0ffdcb5fb26753b8d70c92f3a0033e171327a2efd3e7b61765754d76f18"
+      "sha256": "353fade31c3f1e4bc5ad77807e3b2947701b0e658008c2441901a7f155eecf95"
     },
     {
       "path": "Controller/Feed/Catalog.php",
@@ -50,7 +50,7 @@
     {
       "path": "Model/Config.php",
       "mode": "100644",
-      "sha256": "595188587a0978f457e6cd83a64da56d9f8fa1fe62cc8e51fb4aad03cf112361"
+      "sha256": "0aac24af595368fc744575ceb6e1d49e0360b7e5b55c5cdad34b1407cad7a380"
     },
     {
       "path": "Model/Config/FeedToken.php",
@@ -90,7 +90,7 @@
     {
       "path": "README.md",
       "mode": "100644",
-      "sha256": "5b7fea7a5ae014ab99f0470d6729b384ddcb2c21069202d461b87c832593e981"
+      "sha256": "4ddea68340deea451398fbfad105cd5cf95d1160691aae1fe0a5a2e3719fddc9"
     },
     {
       "path": "composer.json",
