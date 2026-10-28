@@ -1,0 +1,73 @@
+{
+  "name": "selectika/module-ai-commerce",
+  "description": "Selectika AI Commerce for Magento: catalog feeds, storefront experiences and analytics",
+  "type": "magento2-module",
+  "keywords": [
+    "magento2",
+    "adobe-commerce",
+    "selectika",
+    "catalog",
+    "analytics"
+  ],
+  "readme": "README.md",
+  "homepage": "https://github.com/Selectika/magento2-ai-commerce",
+  "support": {
+    "source": "https://github.com/Selectika/magento2-ai-commerce",
+    "docs": "https://github.com/Selectika/magento2-ai-commerce#readme",
+    "issues": "https://github.com/Selectika/magento2-ai-commerce/issues"
+  },
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1 <8.6",
+    "magento/framework": "^103.0",
+    "magento/module-catalog": "^104.0",
+    "magento/module-config": "^101.0",
+    "magento/module-configurable-product": "^100.4",
+    "magento/module-checkout": "^100.4",
+    "magento/module-customer": "^103.0",
+    "magento/module-quote": "^101.2",
+    "magento/module-sales": "^103.0",
+    "magento/module-store": "^101.0",
+    "magento/module-integration": "^100.4",
+    "magento/module-csp": "^100.4"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Selectika\\AiCommerce\\": ""
+    },
+    "exclude-from-classmap": [
+      "/tests/",
+      "/examples/"
+    ]
+  },
+  "archive": {
+    "name": "selectika-module-ai-commerce",
+    "exclude": [
+      "/*",
+      "!/Block",
+      "!/Console",
+      "!/Controller",
+      "!/Cron",
+      "!/CustomerData",
+      "!/Model",
+      "!/Observer",
+      "!/etc",
+      "!/view",
+      "!/composer.json",
+      "!/registration.php",
+      "!/README.md",
+      "!/LICENSE",
+      "!/LICENSE.txt",
+      "!/LICENSE.md",
+      ".*",
+      "*.bak",
+      "*.log",
+      "*.orig",
+      "*.swp",
+      "*.zip"
+    ]
+  }
+}

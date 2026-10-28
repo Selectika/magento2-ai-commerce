@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="selectika" translate="label" sortOrder="900"><label>Selectika</label></tab>
+        <section id="selectika" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>AI Commerce</label><tab>selectika</tab><resource>Selectika_AiCommerce::config</resource>
+            <group id="connection" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Selectika account</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"><label>Enable connection</label><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
+                <field id="retailer_name" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"><label>Selectika retailer name</label><comment>Use the existing retailer name from Selectika. This does not create an account or change product identities.</comment></field>
+                <field id="publisher_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1"><label>Analytics publisher ID</label><comment>Public publisher identifier supplied by Selectika. Never enter OAuth credentials here.</comment></field>
+            </group>
+            <group id="catalog" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Catalog export</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"><label>Enable catalog export</label><comment>An hourly cron builds a complete immutable snapshot for each enabled store view.</comment><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
+                <field id="feed_token" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"><label>Read-only feed token</label><backend_model>Selectika\AiCommerce\Model\Config\FeedToken</backend_model><comment>A unique random token of at least 32 characters. Stored encrypted. Send it only in the Authorization header; it cannot update products.</comment></field>
+                <field id="color_attribute" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1"><label>Color attribute code</label><validate>validate-code</validate></field>
+                <field id="size_attribute" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1"><label>Size attribute code</label><validate>validate-code</validate></field>
+                <field id="extra_attributes" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"><label>Additional attribute codes</label><comment>Comma-separated product attributes to export as labels. Do not include private customer or order data.</comment></field>
+            </group>
+            <group id="storefront" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Storefront and analytics</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"><label>Install Selectika loader</label><comment>Loads the existing Selectika widgets. Remove legacy manual/GTM embeds during migration.</comment><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
+                <field id="tracking_enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"><label>Enable native store event bridge</label><comment>Opt in after disabling duplicate native commerce tracking. Uses the existing Selectika pixel and publisher ID.</comment><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
+                <field id="require_consent" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1"><label>Wait for analytics consent</label><comment>Default Yes. Starts the loader and pixel only after your consent manager grants analytics permission using the documented bridge.</comment><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
+            </group>
+        </section>
+    </system>
+</config>

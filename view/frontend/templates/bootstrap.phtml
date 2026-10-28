@@ -1,0 +1,14 @@
+<?php
+/** @var \Selectika\AiCommerce\Block\Bootstrap $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php if ($block->isEnabled()): ?>
+    <?php $product = $block->publicConfig()['product']; ?>
+    <div id="selectika-magento-context" hidden data-mage-init="<?= $escaper->escapeHtmlAttr($block->mageInit()) ?>">
+        <?php if ($product): ?>
+            <input type="hidden" id="selectika-product-sku" value="<?= $escaper->escapeHtmlAttr($product['sku']) ?>">
+            <input type="hidden" id="selectika-selected-variant-sku" value="">
+            <input type="hidden" id="selectika-selected-variant-id" value="">
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

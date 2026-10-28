@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "distribution": "Selectika/magento2-ai-commerce",
+  "package": "selectika/module-ai-commerce",
+  "sourcePath": "plugins/magento",
+  "sourceSha": "27dd55597280e39196a4e127006e62a1346eec32",
+  "version": "0.1.0",
+  "contentSha256": "18e724cf38f245f3065de50d38a81f324beda20c80cf488df49a5af1adb03c09",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "sha256": "d393726fb7bf2baa805d3ea618db734373d0b6e4797de4ae50e4368368134c93"
+    },
+    {
+      "path": "Block/Bootstrap.php",
+      "mode": "100644",
+      "sha256": "68b9a4a94bf2e31ae268e4977741f9e0a8dea582ae3ff86572b5edd118229168"
+    },
+    {
+      "path": "Console/ExportCommand.php",
+      "mode": "100644",
+      "sha256": "beb2f0ffdcb5fb26753b8d70c92f3a0033e171327a2efd3e7b61765754d76f18"
+    },
+    {
+      "path": "Controller/Feed/Catalog.php",
+      "mode": "100644",
+      "sha256": "590e690a18878c5a44cc72b9102e88a7195e2e54295f37cf57e412ad731d4eb0"
+    },
+    {
+      "path": "Cron/ExportCatalog.php",
+      "mode": "100644",
+      "sha256": "7bdf9c0c8b3ae0dd71b8aee3d948e3aadbba3734107da5cec4cc68febcc3b495"
+    },
+    {
+      "path": "CustomerData/Events.php",
+      "mode": "100644",
+      "sha256": "5603b1b25fd4fb843ffbc0679fa7b2184677c93223854cc2716ff7c6a6b2ac7b"
+    },
+    {
+      "path": "Model/CatalogRows.php",
+      "mode": "100644",
+      "sha256": "9595f8f63d8962a82a608b3e23562ae00502bdac2f6d64e24248cd21c86ae731"
+    },
+    {
+      "path": "Model/CommerceItems.php",
+      "mode": "100644",
+      "sha256": "495466e2dc0bc7b8f144da1f07f9f379d02fea287660f2e0d6b007e9b81e70c7"
+    },
+    {
+      "path": "Model/Config.php",
+      "mode": "100644",
+      "sha256": "595188587a0978f457e6cd83a64da56d9f8fa1fe62cc8e51fb4aad03cf112361"
+    },
+    {
+      "path": "Model/Config/FeedToken.php",
+      "mode": "100644",
+      "sha256": "9bfe6c09d42f52924e225d187dc7c64bfc386008aad5d4356622a0d88691b752"
+    },
+    {
+      "path": "Model/EventBuffer.php",
+      "mode": "100644",
+      "sha256": "97e17c38005926480c3e340869591f35a51ddb7d5acd4db7b36f89a0d4275a79"
+    },
+    {
+      "path": "Model/ExportCatalog.php",
+      "mode": "100644",
+      "sha256": "2399bd11f23c459451a3a14947b924a8bc0decfba182b47c1ddc45a287792a3b"
+    },
+    {
+      "path": "Model/FeedAuthorization.php",
+      "mode": "100644",
+      "sha256": "5fac7e6619f6ee2c24f64197de312f83ba466b5cfb03824c1a40f672eb3c37e1"
+    },
+    {
+      "path": "Model/SnapshotStore.php",
+      "mode": "100644",
+      "sha256": "f3fa45015a855b89198b1914aff765a665ef3227b072c6396827b8b3e509ab63"
+    },
+    {
+      "path": "Observer/CartAdded.php",
+      "mode": "100644",
+      "sha256": "747b9a2fe835f3b48ceff2ee440c75c9ba277c8df7e4ef30b438964a6d300ad1"
+    },
+    {
+      "path": "Observer/CheckoutSuccess.php",
+      "mode": "100644",
+      "sha256": "ee9b5a2fde4eb82d40face066c37ee9521327da0b7fab50e24a6066719031fb4"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "sha256": "5b7fea7a5ae014ab99f0470d6729b384ddcb2c21069202d461b87c832593e981"
+    },
+    {
+      "path": "composer.json",
+      "mode": "100644",
+      "sha256": "809899f4420587dace75144749923219a5f48629b81a3b06824161ce5c5ace1c"
+    },
+    {
+      "path": "etc/acl.xml",
+      "mode": "100644",
+      "sha256": "44fb5500310ce2fc11380dc81d3c7f1d39a248a2b1f4c7d442030bc3b1f66810"
+    },
+    {
+      "path": "etc/adminhtml/system.xml",
+      "mode": "100644",
+      "sha256": "d94cf01758a1531352a3e6f15c0d61aae494d82aab1afc377d4907ed4927b76c"
+    },
+    {
+      "path": "etc/config.xml",
+      "mode": "100644",
+      "sha256": "a4b3511f09e9c1170fc494c57e02797bb0b6a5987e27424a94e75e03d61b8d4f"
+    },
+    {
+      "path": "etc/crontab.xml",
+      "mode": "100644",
+      "sha256": "3e575ba3ea30f2cb05509eb1822e4a750ec148eb2e6508ac55a40c33ab51f8fa"
+    },
+    {
+      "path": "etc/csp_whitelist.xml",
+      "mode": "100644",
+      "sha256": "c3c2167e9933a0ff61630f8c055157ad361f36b84ee45e90f505e282167508da"
+    },
+    {
+      "path": "etc/di.xml",
+      "mode": "100644",
+      "sha256": "22583cc4a0db8131ac6c3091e7b41e9806b5b682b4fa4c5819f21122cf2a7c9d"
+    },
+    {
+      "path": "etc/frontend/di.xml",
+      "mode": "100644",
+      "sha256": "8d145aee60274aa7138580915f05c23a060fd1788aed9119e8bb26199ff66b4e"
+    },
+    {
+      "path": "etc/frontend/events.xml",
+      "mode": "100644",
+      "sha256": "944daec5da9f0b889615957680c38c749a113715c3caa2e916e7c2db02710a9f"
+    },
+    {
+      "path": "etc/frontend/routes.xml",
+      "mode": "100644",
+      "sha256": "24a10d97828788b458bfa66b18f5427db39c0635fdbc2d0782149671a56f7f4b"
+    },
+    {
+      "path": "etc/frontend/sections.xml",
+      "mode": "100644",
+      "sha256": "77d16d8bfef1b84a198925347865a67c088b136609eb4008719bb7dd4d6e9471"
+    },
+    {
+      "path": "etc/module.xml",
+      "mode": "100644",
+      "sha256": "3d4f26e903910b76b8c86b378e2a81d05fe20724a78ab455cbbddb86ce05b6b8"
+    },
+    {
+      "path": "registration.php",
+      "mode": "100644",
+      "sha256": "2daeb5c798106aed55823e5ff920fa11a580fccdcf1384fc086a106c7c7e4532"
+    },
+    {
+      "path": "view/frontend/layout/default.xml",
+      "mode": "100644",
+      "sha256": "19055c6ad21e9f1450a69e15ad55a0f9b990d80a059c8be7346a623ab8a7d853"
+    },
+    {
+      "path": "view/frontend/templates/bootstrap.phtml",
+      "mode": "100644",
+      "sha256": "c5cb16e63f3e604b46ebcb68fbb8a2dd3b7fed6d4aa89e16d7c7922e1298f4bf"
+    },
+    {
+      "path": "view/frontend/web/js/bootstrap.js",
+      "mode": "100644",
+      "sha256": "add7031c3d8f2025608985247efa69a3a8c8ae8a2d917fe65f7f78895f82a0de"
+    },
+    {
+      "path": "view/frontend/web/js/runtime.js",
+      "mode": "100644",
+      "sha256": "4da264854ddd45eced1d0a18ecb5f43c1988de4a7d242c2a0e928182a968b81b"
+    }
+  ]
+}

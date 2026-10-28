@@ -1,0 +1,34 @@
+# VCS dist archives (including GitHub archives) do not use Composer archive.exclude.
+# Keep the release payload limited to the Magento runtime and merchant documentation.
+* export-ignore
+/Block -export-ignore
+/Block/** -export-ignore
+/Console -export-ignore
+/Console/** -export-ignore
+/Controller -export-ignore
+/Controller/** -export-ignore
+/Cron -export-ignore
+/Cron/** -export-ignore
+/CustomerData -export-ignore
+/CustomerData/** -export-ignore
+/Model -export-ignore
+/Model/** -export-ignore
+/Observer -export-ignore
+/Observer/** -export-ignore
+/etc -export-ignore
+/etc/** -export-ignore
+/view -export-ignore
+/view/** -export-ignore
+/composer.json -export-ignore
+/registration.php -export-ignore
+/README.md -export-ignore
+/LICENSE -export-ignore
+/LICENSE.txt -export-ignore
+/LICENSE.md -export-ignore
+.* export-ignore
+.selectika-release.json export-ignore
+*.bak export-ignore
+*.log export-ignore
+*.orig export-ignore
+*.swp export-ignore
+*.zip export-ignore

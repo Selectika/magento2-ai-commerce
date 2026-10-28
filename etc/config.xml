@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <selectika>
+            <connection><enabled>0</enabled><retailer_name></retailer_name><publisher_id></publisher_id></connection>
+            <catalog><enabled>0</enabled><color_attribute>color</color_attribute><size_attribute>size</size_attribute><extra_attributes>manufacturer,material</extra_attributes></catalog>
+            <storefront><enabled>0</enabled><tracking_enabled>0</tracking_enabled><require_consent>1</require_consent></storefront>
+        </selectika>
+    </default>
+</config>
