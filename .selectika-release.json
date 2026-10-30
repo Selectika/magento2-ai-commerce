@@ -3,7 +3,7 @@
   "distribution": "Selectika/magento2-ai-commerce",
   "package": "selectika/module-ai-commerce",
   "sourcePath": "plugins/magento",
-  "sourceSha": "3f648911932ce5c3021700b27ce22caf116844b9",
+  "sourceSha": "f1c4a1f460e2853ed6f762f541bb3bf0f95b227a",
   "version": "0.1.1",
   "contentSha256": "dfa99c3ede96be38a76886da197b809ee55d91ab1c572300479bb8c0700bfdf7",
   "files": [
