@@ -3,9 +3,9 @@
   "distribution": "Selectika/magento2-ai-commerce",
   "package": "selectika/module-ai-commerce",
   "sourcePath": "plugins/magento",
-  "sourceSha": "9e42bcd1c0acfa860cdffe3f4a6d4ef7a3bc0b80",
+  "sourceSha": "9132912f61e2012618bef7ddbcdbe24f774358f5",
   "version": "0.2.0",
-  "contentSha256": "bed6c28848c28a31efdda86bae217211d70939744fc3425b54e17277bca56bb1",
+  "contentSha256": "a297b885216ab5b9d0d7e375e52d23d59b89631ebc3ed7cddfa829a8991a27d1",
   "files": [
     {
       "path": ".gitattributes",
@@ -43,6 +43,31 @@
       "sha256": "d8f318b846b75bafc4528731709f9340dd7b7a995d2c378566c3d4fdc6ca8a08"
     },
     {
+      "path": "Controller/Cart/AbstractAction.php",
+      "mode": "100644",
+      "sha256": "02f84f714f1d73b9c17e34d66829fddd85672526a0c3cf9407ccd2c06fd67e6e"
+    },
+    {
+      "path": "Controller/Cart/Create.php",
+      "mode": "100644",
+      "sha256": "8e92ebbc25f6b7cc7c277d6b1139a009582bcae7ae070f2114da57516e2ca251"
+    },
+    {
+      "path": "Controller/Cart/Read.php",
+      "mode": "100644",
+      "sha256": "40ef2e0e8b4a51f3c004782479c5ee676ed31895ab6ebe63efdb6576176a7cea"
+    },
+    {
+      "path": "Controller/Cart/Replace.php",
+      "mode": "100644",
+      "sha256": "6d4d8d1dd9077886000ebaa53205ba7c18198425d99088adaa1c4ca120b4d92a"
+    },
+    {
+      "path": "Controller/Commerce/Review.php",
+      "mode": "100644",
+      "sha256": "5254a0bf5a892827044cbee4c691a4c87f3fdfe113f46763271fb6d5d6a14997"
+    },
+    {
       "path": "Controller/Feed/Catalog.php",
       "mode": "100644",
       "sha256": "807de0fb504a4d577565aaf96ce53329de89e66998a3f0cdd563652b7d191742"
@@ -58,6 +83,16 @@
       "sha256": "5603b1b25fd4fb843ffbc0679fa7b2184677c93223854cc2716ff7c6a6b2ac7b"
     },
     {
+      "path": "Model/AgentCart.php",
+      "mode": "100644",
+      "sha256": "b7030a8e7565e481bc16cd215cb64d03fbf2f9668530e2c378aeb9169cf28fb6"
+    },
+    {
+      "path": "Model/AgentVariant.php",
+      "mode": "100644",
+      "sha256": "73b5dcd2eaed1c9c7d1ebbcdca5b367054b4fe3643afd26be32aecb3b7491787"
+    },
+    {
       "path": "Model/CatalogRows.php",
       "mode": "100644",
       "sha256": "27a4c5c5eff17542359766a8f95add670300ddc242175d80aadf56305422cb40"
@@ -70,7 +105,7 @@
     {
       "path": "Model/Config.php",
       "mode": "100644",
-      "sha256": "006200112fd75ff5a8bcf4f7f418b7449dcbe774c4c8a1ef63669329206a6f83"
+      "sha256": "6e024aa2e4b6bb1c8b9cab7633474bb64b7e374715c2111f95db5f36c9b66f21"
     },
     {
       "path": "Model/Config/FeedToken.php",
@@ -120,7 +155,7 @@
     {
       "path": "README.md",
       "mode": "100644",
-      "sha256": "05402f86d12f0870437b55cc00a2ef833e2f989beb5b94be1b668ebcacfb4d83"
+      "sha256": "9f623e9dd6392f5212e0521ef1c9a2eb8e9a5f7e20e1c85375f1b982d2c32b35"
     },
     {
       "path": "composer.json",
@@ -145,7 +180,7 @@
     {
       "path": "etc/adminhtml/system.xml",
       "mode": "100644",
-      "sha256": "5c2f3909072cee9576bd76782802ffd2d791410973dae4ec307a7c3a30485d3e"
+      "sha256": "2d01d5fe80eaee04e7e08e4e83b8eabfdfd5af60beb7a4201f411f90cc536420"
     },
     {
       "path": "etc/config.xml",
@@ -165,7 +200,7 @@
     {
       "path": "etc/di.xml",
       "mode": "100644",
-      "sha256": "22583cc4a0db8131ac6c3091e7b41e9806b5b682b4fa4c5819f21122cf2a7c9d"
+      "sha256": "370c66dd640c1191adb6bcf6d1814ddcacf1847c4ebd51909a1f8845823cbdc3"
     },
     {
       "path": "etc/frontend/di.xml",

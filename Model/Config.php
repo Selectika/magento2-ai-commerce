@@ -31,6 +31,16 @@ class Config
         return $this->encryptor->decrypt($this->value('catalog/feed_token', $storeId));
     }
 
+    public function agentCartToken(int $storeId): string
+    {
+        return $this->encryptor->decrypt($this->value('agent_commerce/cart_api_token', $storeId));
+    }
+
+    public function agentToken(int $storeId): string
+    {
+        return $this->encryptor->decrypt($this->value('agent_commerce/token', $storeId));
+    }
+
     public function requiresConsent(int $storeId): bool
     {
         return $this->value('storefront/require_consent', $storeId) !== '0';

@@ -24,6 +24,13 @@
                 <field id="tracking_enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"><label>Enable native store event bridge</label><comment>Opt in after disabling duplicate native commerce tracking. Uses the existing Selectika pixel and publisher ID.</comment><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
                 <field id="require_consent" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1"><label>Wait for analytics consent</label><comment>Default Yes. Starts the loader and pixel only after your consent manager grants analytics permission using the documented bridge.</comment><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
             </group>
+            <group id="agent_commerce" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>AI shopping transfer</label>
+                <field id="cart_api_token" translate="label comment" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1"><label>Guest cart API token</label><backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model><comment>Separate random secret (32+ characters) for the private guest-cart adapter. Never expose in browser code.</comment></field>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"><label>Enable confirmed cart transfer</label><source_model>Magento\Config\Model\Config\Source\Yesno</source_model></field>
+                <field id="mcp_origin" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1"><label>Commerce service HTTPS origin</label></field>
+                <field id="token" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1"><label>Scoped cart transfer token</label><backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model><comment>Use a dedicated retailer credential with cart:handoff only. Existing catalog tokens do not grant cart transfer access.</comment></field>
+            </group>
         </section>
     </system>
 </config>

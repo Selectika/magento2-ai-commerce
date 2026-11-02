@@ -500,3 +500,23 @@ Official references: [Magento module registration](https://developer.adobe.com/c
 [private content](https://developer.adobe.com/commerce/php/development/cache/page/private-content/),
 [JavaScript initialization](https://developer.adobe.com/commerce/frontend-core/javascript/init/),
 [CSP](https://developer.adobe.com/commerce/php/development/security/content-security-policies/).
+
+### Retailer AI cart transfer (staging opt-in)
+
+The AI shopping transfer configuration group enables `/selectika/commerce/review` for the current store view.
+Set the HTTPS commerce service origin and a dedicated encrypted retailer credential with `cart:handoff`.
+GET renders confirmation only. POST validates Magento's form key, locks the shopper session, consumes one
+short-lived ticket, validates exact simple/configurable variants and current prices and adds to the existing browser quote. It never
+clears that quote or completes payment. Partial/uncertain transfers cannot replay the redeemed ticket.
+
+The bridge requires base and current currency to match. Configurable variants use the existing `product#attribute#option` identifiers (all native configurable attributes must be present).
+Configurable/bundle option mappings and other currencies need a verified store adapter. Native quote reads
+alone do not prove salability, so MCP checkout remains disabled unless its authoritative preflight and this
+bridge both pass staging. Existing feed credentials do not gain these permissions.
+
+The dedicated guest-cart endpoints are POST `/selectika/cart/create`, `/selectika/cart/read`, and
+`/selectika/cart/replace`. Provision the MCP custom adapter with `prefix: "/selectika/cart"` and
+its own encrypted `cart_api_token`; never reuse the handoff credential. Both secrets are excluded
+from configuration exports. Guest quotes are store-scoped, masked and locked during replacement.
+For Nautica, install and compile this module before enabling carts; current integration has no module.
+The fixture `tests/agent-variant.php` covers its composite IDs, but is not a live checkout test.
