@@ -3,14 +3,19 @@
   "distribution": "Selectika/magento2-ai-commerce",
   "package": "selectika/module-ai-commerce",
   "sourcePath": "plugins/magento",
-  "sourceSha": "bd41c4ec382d79b07f5701e66d6cc05fd6af8a1a",
-  "version": "0.1.3",
-  "contentSha256": "3998aadfef7efeefc3290537692feff3ab4a5cc5b2c379f54836e3d78eaffa28",
+  "sourceSha": "9e42bcd1c0acfa860cdffe3f4a6d4ef7a3bc0b80",
+  "version": "0.2.0",
+  "contentSha256": "bed6c28848c28a31efdda86bae217211d70939744fc3425b54e17277bca56bb1",
   "files": [
     {
       "path": ".gitattributes",
       "mode": "100644",
       "sha256": "d393726fb7bf2baa805d3ea618db734373d0b6e4797de4ae50e4368368134c93"
+    },
+    {
+      "path": "Block/Adminhtml/Overview.php",
+      "mode": "100644",
+      "sha256": "be7b98c99ca5ea8ab1dd2bdfd426df93d026a289dce0437ee420478527fb112a"
     },
     {
       "path": "Block/Bootstrap.php",
@@ -21,6 +26,21 @@
       "path": "Console/ExportCommand.php",
       "mode": "100644",
       "sha256": "dec14ad8b701f023c2fe199525305cbcd74680625e7afae841d339202600280e"
+    },
+    {
+      "path": "Controller/Adminhtml/Overview/Build.php",
+      "mode": "100644",
+      "sha256": "a068bcfbc61f2b3bee074f6fe6832be24d7e57495fb908e6525ddfb26d0ae3b4"
+    },
+    {
+      "path": "Controller/Adminhtml/Overview/Index.php",
+      "mode": "100644",
+      "sha256": "674b5987c15d9cd2568ffe8ec39625436ff5d16090cc75c732e057dad6aa8719"
+    },
+    {
+      "path": "Controller/Adminhtml/Overview/Test.php",
+      "mode": "100644",
+      "sha256": "d8f318b846b75bafc4528731709f9340dd7b7a995d2c378566c3d4fdc6ca8a08"
     },
     {
       "path": "Controller/Feed/Catalog.php",
@@ -50,7 +70,7 @@
     {
       "path": "Model/Config.php",
       "mode": "100644",
-      "sha256": "c7810e7fdfefcb86b3b3280f945fb6c5e13eda2d5db6aea6a2cd2132a1040930"
+      "sha256": "006200112fd75ff5a8bcf4f7f418b7449dcbe774c4c8a1ef63669329206a6f83"
     },
     {
       "path": "Model/Config/FeedToken.php",
@@ -73,6 +93,16 @@
       "sha256": "b66978b848b43dd3860d61b15f1fbe2c80864ed0f87f0244c6f2c7a81058474b"
     },
     {
+      "path": "Model/FeedProbe.php",
+      "mode": "100644",
+      "sha256": "fe0271f6c3b6d3a76a94688af241ecb55c132f27e4ad6868ed0d54c3c6e3f5f6"
+    },
+    {
+      "path": "Model/Health.php",
+      "mode": "100644",
+      "sha256": "ee800e7a243ec2f210247e56d8d75fa338bc73e491a983dfcc551ee94f243b22"
+    },
+    {
       "path": "Model/SnapshotStore.php",
       "mode": "100644",
       "sha256": "f3fa45015a855b89198b1914aff765a665ef3227b072c6396827b8b3e509ab63"
@@ -90,17 +120,27 @@
     {
       "path": "README.md",
       "mode": "100644",
-      "sha256": "6a7f06ae2351516d8f1a8b03f9708bb142e4b851b01a1948b22de0749058b1b3"
+      "sha256": "05402f86d12f0870437b55cc00a2ef833e2f989beb5b94be1b668ebcacfb4d83"
     },
     {
       "path": "composer.json",
       "mode": "100644",
-      "sha256": "809899f4420587dace75144749923219a5f48629b81a3b06824161ce5c5ace1c"
+      "sha256": "150963e30318716840b937ba50ca87fae54c647ac8a0274c16b231671b6cbdfd"
     },
     {
       "path": "etc/acl.xml",
       "mode": "100644",
-      "sha256": "44fb5500310ce2fc11380dc81d3c7f1d39a248a2b1f4c7d442030bc3b1f66810"
+      "sha256": "5e5f21e064aabcd240e5d8f1707309b6618e17aca68e777fbf488a86d70ec177"
+    },
+    {
+      "path": "etc/adminhtml/menu.xml",
+      "mode": "100644",
+      "sha256": "6ef7df55c0f6ac64499359357185620fb3bf81ab4769094a0d1d27ff2d75d3f5"
+    },
+    {
+      "path": "etc/adminhtml/routes.xml",
+      "mode": "100644",
+      "sha256": "0bd52322a2ac1191c9c1291b7d3fb1e5936b6b6bc456a9b6698c560cadcb6de9"
     },
     {
       "path": "etc/adminhtml/system.xml",
@@ -150,12 +190,27 @@
     {
       "path": "etc/module.xml",
       "mode": "100644",
-      "sha256": "3d4f26e903910b76b8c86b378e2a81d05fe20724a78ab455cbbddb86ce05b6b8"
+      "sha256": "e9f6708653f4e76c122878d951fde61dc084fe9b247e432640676f35533c20be"
     },
     {
       "path": "registration.php",
       "mode": "100644",
       "sha256": "2daeb5c798106aed55823e5ff920fa11a580fccdcf1384fc086a106c7c7e4532"
+    },
+    {
+      "path": "view/adminhtml/layout/selectika_overview_index.xml",
+      "mode": "100644",
+      "sha256": "e91a17f0e68343a9f732c93eddace8235603f5fca372ccf0f43031646f2c1095"
+    },
+    {
+      "path": "view/adminhtml/templates/overview.phtml",
+      "mode": "100644",
+      "sha256": "c47ad1174945996f3c96243e9f4f9c63440d1de655df7ded4be62083f1b91ebb"
+    },
+    {
+      "path": "view/adminhtml/web/css/overview.css",
+      "mode": "100644",
+      "sha256": "35ea40cfb7eecfef75a3b63cfe58e8ff04dec92af003f8ecef5b2827cd3e3c85"
     },
     {
       "path": "view/frontend/layout/default.xml",

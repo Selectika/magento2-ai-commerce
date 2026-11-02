@@ -1,0 +1,80 @@
+<?php
+/** @var \Selectika\AiCommerce\Block\Adminhtml\Overview $block */
+$views = $block->storeViews();
+$labels = ['ok' => ['✓', __('OK')], 'warn' => ['!', __('Check')], 'fail' => ['✕', __('Fix')]];
+$summaries = ['ok' => __('Ready'), 'warn' => __('Works, needs a look'), 'fail' => __('Action needed')];
+$formKey = $block->getFormKey();
+?>
+<div class="slk-overview">
+    <header class="slk-head">
+        <div>
+            <h2 class="slk-title"><?= $block->escapeHtml(__('Selectika AI Commerce')) ?></h2>
+            <p class="slk-lede"><?= $block->escapeHtml(__('Check that your catalog reaches Selectika, build a snapshot, and test the feed the way Selectika reads it.')) ?></p>
+        </div>
+        <p class="slk-version"><?= $block->escapeHtml(__('Version %1', $block->version())) ?></p>
+    </header>
+
+<?php if ($views === []): ?>
+    <p class="slk-empty"><?= $block->escapeHtml(__('There is no active store view yet.')) ?></p>
+<?php endif; ?>
+
+    <div class="slk-stores">
+<?php foreach ($views as $view): ?>
+        <section class="slk-card" aria-labelledby="slk-store-<?= (int) $view['id'] ?>">
+            <header class="slk-card-head">
+                <h3 id="slk-store-<?= (int) $view['id'] ?>" class="slk-card-title">
+                    <?= $block->escapeHtml($view['name']) ?> <small><?= $block->escapeHtml($view['code']) ?></small>
+                </h3>
+                <p class="slk-status" data-status="<?= $block->escapeHtmlAttr($view['summary']) ?>">
+                    <span aria-hidden="true"><?= $labels[$view['summary']][0] ?></span>
+                    <?= $block->escapeHtml($summaries[$view['summary']]) ?>
+                </p>
+            </header>
+
+            <ol class="slk-steps">
+<?php foreach ($view['checks'] as $check): ?>
+                <li class="slk-step" data-status="<?= $block->escapeHtmlAttr($check['status']) ?>">
+                    <p class="slk-status" data-status="<?= $block->escapeHtmlAttr($check['status']) ?>">
+                        <span aria-hidden="true"><?= $labels[$check['status']][0] ?></span>
+                        <?= $block->escapeHtml($labels[$check['status']][1]) ?>
+                    </p>
+                    <div class="slk-step-body">
+                        <h4><?= $block->escapeHtml($check['title']) ?></h4>
+                        <p><?= $block->escapeHtml($check['detail']) ?></p>
+                    </div>
+<?php if ($check['action'] === 'config'): ?>
+                    <a class="action-secondary slk-btn" href="<?= $block->escapeUrl($block->configUrl($view['id'])) ?>"><?= $block->escapeHtml(__('Open settings')) ?></a>
+<?php elseif ($check['action'] === 'build' || $check['action'] === 'test'): ?>
+                    <form class="slk-action" method="post" action="<?= $block->escapeUrl($block->getUrl('selectika/overview/' . $check['action'])) ?>">
+                        <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>">
+                        <input type="hidden" name="store_id" value="<?= (int) $view['id'] ?>">
+                        <button type="submit" class="action-primary slk-btn">
+                            <?= $block->escapeHtml($check['action'] === 'build' ? __('Build snapshot now') : __('Run feed test')) ?>
+                        </button>
+                    </form>
+<?php endif; ?>
+                </li>
+<?php endforeach; ?>
+            </ol>
+
+<?php if ($view['summary'] === 'ok'): ?>
+            <form class="slk-action slk-rebuild" method="post" action="<?= $block->escapeUrl($block->getUrl('selectika/overview/build')) ?>">
+                <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>">
+                <input type="hidden" name="store_id" value="<?= (int) $view['id'] ?>">
+                <button type="submit" class="action-secondary slk-btn"><?= $block->escapeHtml(__('Rebuild snapshot')) ?></button>
+            </form>
+<?php endif; ?>
+
+            <details class="slk-report">
+                <summary><?= $block->escapeHtml(__('Support report')) ?></summary>
+                <p><?= $block->escapeHtml(__('Paste this into a message to Selectika support. It contains no token, credentials or product data.')) ?></p>
+                <textarea readonly rows="8" aria-label="<?= $block->escapeHtmlAttr(__('Support report')) ?>"><?= $block->escapeHtml($view['report']) ?></textarea>
+            </details>
+        </section>
+<?php endforeach; ?>
+    </div>
+
+    <footer class="slk-foot">
+        <p><?= $block->escapeHtml(__('The feed token and account settings live under Stores → Configuration → Selectika. Large catalogs are exported by the hourly job or "bin/magento selectika:catalog:export --store=<code>".')) ?></p>
+    </footer>
+</div>

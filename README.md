@@ -1,6 +1,6 @@
 # Selectika AI Commerce for Magento
 
-Composer module `selectika/module-ai-commerce`, Magento module `Selectika_AiCommerce`, version 0.1.3.
+Composer module `selectika/module-ai-commerce`, Magento module `Selectika_AiCommerce`, version 0.2.0.
 The module supplies a protected catalog snapshot and the existing Selectika storefront loader,
 with an optional native commerce event bridge. All features are disabled on installation.
 Account linking is manual in this version. This source package is not a Marketplace listing.
@@ -44,8 +44,8 @@ For local development, copy this module inside the Magento project at
 `packages/selectika/module-ai-commerce` and use a path repository:
 
 ```sh
-composer config repositories.selectika-ai-commerce '{"type":"path","url":"packages/selectika/module-ai-commerce","options":{"versions":{"selectika/module-ai-commerce":"0.1.3"},"symlink":false}}'
-composer require selectika/module-ai-commerce:0.1.3
+composer config repositories.selectika-ai-commerce '{"type":"path","url":"packages/selectika/module-ai-commerce","options":{"versions":{"selectika/module-ai-commerce":"0.2.0"},"symlink":false}}'
+composer require selectika/module-ai-commerce:0.2.0
 ```
 
 Then run the same module-enable, setup, compilation and cache commands above. This version
@@ -198,6 +198,34 @@ never credentials or Authorization headers. Adobe's
 [OAuth error reference](https://developer.adobe.com/commerce/webapi/get-started/authentication/oauth-errors)
 can help identify signature failures. No merchant is considered connected until deployment,
 credential storage, authenticated read, approved write/readback and storefront checks are verified.
+
+## Admin overview
+
+**Selectika → Overview** in the Magento admin menu shows, for every active store view, a checklist of what the
+integration needs and what to do next. **Selectika → Settings** opens the existing configuration section.
+
+| Check | Fails or warns when |
+| --- | --- |
+| Selectika account | the connection is off or the retailer name is empty (fail) |
+| Analytics publisher ID | empty (warning; the feed does not need it) |
+| Catalog feed and token | catalog export is off, or the stored token is shorter than 32 characters (fail; the feed answers 401) |
+| HTTPS store URL | the store view base URL is not `https://` (fail) |
+| Hourly export job | no successful `selectika_catalog_export` cron run in the last 3 hours (warning) |
+| Catalog snapshot | none, or older than 24 hours (fail; the feed answers 503) |
+| Live feed test | always offered once the feed and HTTPS checks pass |
+
+Actions, both `POST` with Magento's form key and the **Selectika Overview** ACL resource
+(`Selectika_AiCommerce::overview`):
+
+- **Build snapshot now** / **Rebuild snapshot** runs the same export as the cron job and the CLI command. It runs inside the
+  admin request, so large catalogs should use the hourly job or `bin/magento selectika:catalog:export --store=<code>`.
+  A failure keeps the previous snapshot and shows a fixed message; details go to the Magento log without the exception text.
+- **Run feed test** requests the store's own public feed URL with its stored token in the `Authorization` header and explains the
+  answer (token rejected, no snapshot, proxy failure, firewall, redirect). It exercises the CDN, proxy and firewall path, not just
+  Magento. The token is only ever sent to that store view's own `https://` base URL and is never rendered in the page.
+
+Each store view has a **Support report**: module and Magento versions, check results and the snapshot id. It contains no token,
+credentials or product data. The page's styles are in `view/adminhtml/web/css/overview.css`, scoped to `.slk-overview`.
 
 ## Catalog export and Selectika feed configuration
 

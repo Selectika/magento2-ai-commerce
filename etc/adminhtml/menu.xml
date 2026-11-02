@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Selectika_AiCommerce::selectika" title="Selectika" translate="title" module="Selectika_AiCommerce" sortOrder="85" resource="Selectika_AiCommerce::overview"/>
+        <add id="Selectika_AiCommerce::overview" title="Overview" translate="title" module="Selectika_AiCommerce" sortOrder="10" parent="Selectika_AiCommerce::selectika" action="selectika/overview" resource="Selectika_AiCommerce::overview"/>
+        <add id="Selectika_AiCommerce::settings" title="Settings" translate="title" module="Selectika_AiCommerce" sortOrder="20" parent="Selectika_AiCommerce::selectika" action="adminhtml/system_config/edit/section/selectika" resource="Selectika_AiCommerce::config"/>
+    </menu>
+</config>

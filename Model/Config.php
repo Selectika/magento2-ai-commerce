@@ -9,7 +9,7 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config
 {
-    public const VERSION = '0.1.3';
+    public const VERSION = '0.2.0';
     public const CONSENT_COOKIE = 'selectika_analytics_consent';
 
     public function __construct(private ScopeConfigInterface $config, private EncryptorInterface $encryptor)

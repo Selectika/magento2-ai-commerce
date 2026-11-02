@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Selectika Overview</title>
+        <css src="Selectika_AiCommerce::css/overview.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Selectika\AiCommerce\Block\Adminhtml\Overview" name="selectika.overview" template="Selectika_AiCommerce::overview.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
